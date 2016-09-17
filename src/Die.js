@@ -8,8 +8,8 @@ class Die extends React.Component {
 
     render() {
         return (
-            <div>
-                {[...new Array(this.props.faces)].map((e, i) => <span>{i}</span>)}
+            <div className="center-block">
+                {[...new Array(this.props.faces)].map((e, i) => <span className="col-md-1 text-center">{i}</span>)}
             </div>
         );
     }

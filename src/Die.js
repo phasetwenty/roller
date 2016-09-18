@@ -4,6 +4,30 @@
 
 import React, { Component, PropTypes } from 'react';
 
+class DieOption extends Component {
+    static propTypes: {
+        active: PropTypes.bool,
+        description: PropTypes.string.isRequired,
+        onClick: PropTypes.fn.isRequired
+    };
+
+    static defaultProps: {active: false};
+
+    render() {
+        if (this.props.active) {
+            return (
+                <li>
+                    <a href="#" onClick={this.props.onClick}>
+                        <i className="glyphicon glyphicon-ok"></i> {this.props.description}
+                    </a>
+                </li>
+            );
+        }
+
+        return <li><a href="#" onClick={this.props.onClick}>{this.props.description}</a></li>;
+    }
+}
+
 class DieFace extends Component {
     static propTypes: {
         value: PropTypes.number.isRequired
@@ -12,37 +36,43 @@ class DieFace extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            highlightClass: 'btn-default'
-        };
+        this.state = {};
+
+        //noinspection JSUnresolvedVariable
+        this.options = ['Double'];
+        this.options.forEach((value) => {
+           this.state[value] = false;
+        });
     }
 
     render() {
-        //noinspection CheckTagEmptyBody
         return (
             <div className="btn-group col-md-1">
-                <span className={`text-center btn dropdown-toggle ${this.state.highlightClass}`}
-                      // onClick={() => this._onClick()}
+                <span className={'text-center btn dropdown-toggle btn-default'}
                       data-toggle="dropdown"
                       aria-haspopup="true"
                       aria-expanded="false">
                   {this.props.value} <span className="caret"></span>
                 </span>
                 <ul className="dropdown-menu">
-                    <li><a href="#">Double</a></li>
+                    {this.options.map((description, i) => this._newOption(description, i))}
                 </ul>
             </div>
         );
     }
 
-    _onClick() {
-        this.setState({
-            highlightClass: this._toggleHighlight(this.state.highlightClass)
-        });
+    _newOption(description, i) {
+        return <DieOption active={this.state[description]}
+                          description={description}
+                          key={i}
+                          onClick={this._toggleOption.bind(this, description)}/>;
     }
 
-    _toggleHighlight(currentValue) {
-        return currentValue === 'btn-default' ? 'btn-primary' : 'btn-default';
+    _toggleOption(optionName) {
+        let newState = {};
+        newState[optionName] = !this.state[optionName];
+        console.log(newState);
+        this.setState(newState);
     }
 }
 

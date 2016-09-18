@@ -2,9 +2,9 @@
  * Created by Chris on 9/14/16.
  **/
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-class DieFace extends React.Component {
+class DieFace extends Component {
     static propTypes: {
         value: PropTypes.number.isRequired
     };
@@ -13,16 +13,25 @@ class DieFace extends React.Component {
         super(props);
 
         this.state = {
-            highlightClass: ''
+            highlightClass: 'btn-default'
         };
     }
 
     render() {
+        //noinspection CheckTagEmptyBody
         return (
-          <span className={`col-md-1 text-center ${this.state.highlightClass}`}
-                onClick={() => this._onClick()}>
-              {this.props.value}
-          </span>
+            <div className="btn-group col-md-1">
+                <span className={`text-center btn dropdown-toggle ${this.state.highlightClass}`}
+                      // onClick={() => this._onClick()}
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false">
+                  {this.props.value} <span className="caret"></span>
+                </span>
+                <ul className="dropdown-menu">
+                    <li><a href="#">Double</a></li>
+                </ul>
+            </div>
         );
     }
 
@@ -33,11 +42,11 @@ class DieFace extends React.Component {
     }
 
     _toggleHighlight(currentValue) {
-        return currentValue === '' ? 'bg-primary' : '';
+        return currentValue === 'btn-default' ? 'btn-primary' : 'btn-default';
     }
 }
 
-class Die extends React.Component {
+class Die extends Component {
     static propTypes: {
         faces: PropTypes.number.isRequired
     };
@@ -45,7 +54,7 @@ class Die extends React.Component {
     render() {
         return (
             <div className="center-block">
-                {[...new Array(this.props.faces)].map((e, i) => <DieFace key={i} value={i}/>)};
+                {[...new Array(this.props.faces)].map((e, i) => <DieFace key={i} value={i}/>)}
             </div>
         );
     }

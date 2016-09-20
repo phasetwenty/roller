@@ -4,6 +4,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import Die from '../src/Die';
+import Roll from '../src/Roll';
 
-ReactDom.render(<Die faces={10}/>, document.getElementById('Die'));
+ReactDom.render(<Roll/>, document.getElementById('Roll'));

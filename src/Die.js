@@ -4,6 +4,9 @@
 
 import React, { Component, PropTypes } from 'react';
 
+/**
+ * 
+ **/
 class DieOption extends Component {
     static propTypes: {
         active: PropTypes.bool,
@@ -17,9 +20,9 @@ class DieOption extends Component {
         if (this.props.active) {
             return (
                 <li>
-                    <a href="#" onClick={this.props.onClick}>
+                    <span onClick={this.props.onClick}>
                         <i className="glyphicon glyphicon-ok"></i> {this.props.description}
-                    </a>
+                    </span>
                 </li>
             );
         }
@@ -76,6 +79,9 @@ class DieFace extends Component {
     }
 }
 
+/**
+ * Component representing a collection of the faces of a die.
+ **/
 class Die extends Component {
     static propTypes: {
         faces: PropTypes.number.isRequired

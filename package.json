@@ -4,6 +4,7 @@
   "description": "A learning exercise for ReactJS",
   "main": "index.js",
   "scripts": {
+    "api": "node app/bootstrap.js",
     "build": "webpack",
     "start": "webpack-dev-server --watch --inline --content-base public/",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,6 +25,10 @@
     "webpack-dev-server": "^1.15.2"
   },
   "dependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "express": "^4.14.0",
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
   }

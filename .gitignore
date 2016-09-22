@@ -88,4 +88,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-pack/bundle*
+app/
+public/

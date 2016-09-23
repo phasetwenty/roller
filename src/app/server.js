@@ -3,12 +3,13 @@
  **/
 import express from 'express';
 
+import Roll from './routes';
+
 let app = express();
 
-app.get('/', function(req, res) {
-   res.send('Hellow Orld!');
-});
+app.get('/roll', Roll);
 
-app.listen(8000, function() {
-    console.log('Listening on http://localhost:8000/');
+let port = 8000;
+app.listen(port, () => {
+    console.log(`Listening on http://localhost:${port}/`);
 });

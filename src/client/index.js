@@ -4,6 +4,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import Roll from './components/Roll';
+import App from './components/App';
 
-ReactDom.render(<Roll/>, document.getElementById('Roll'));
+ReactDom.render(<App/>, document.getElementById('App'));

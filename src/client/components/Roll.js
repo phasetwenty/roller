@@ -1,49 +1,46 @@
 /**
  * Created by Chris on 9/18/16.
  **/
-import 'whatwg-fetch';
 import React, { Component, PropTypes } from 'react';
 
 import AutoSuccessesInput from './AutoSuccessInput';
 import Die from './Die';
 
 class Roll extends Component {
+    static propTypes: {
+        onChangePoolSize: PropTypes.fn.isRequired,
+        onClickRoll: PropTyes.fn.isRequired,
+        poolSize: PropTypes.number.isRequired,
+        rollValue: PropTyes.array
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             autoSuccesses: 0,
-            rollValue: null,
         };
     }
+
     render() {
         return (
             <div className="row">
                 <Die faces={10}/>
                 <AutoSuccessesInput onChange={(event) => this._onChangeSuccesses(event)}
                                   value={this.state.autoSuccesses}/>
+
+                <label htmlFor="id-pool-size">Number of dice to roll</label>
+                <input id="id-pool-size" onChange={(event) => this.props.onChangePoolSize(event)}
+                       type="number"
+                       value={this.props.poolSize}/>
                 <span className="btn btn-primary"
-                      onClick={(event) => this._onClickRoll(event)}>
+                      onClick={this.props.onClickRoll}>
                     Roll
                 </span>
                 <div>
-                    Roll value: {this.state.rollValue}
+                    Roll value: {this.props.rollValue}
                 </div>
             </div>
         );
-    }
-
-    _onClickRoll(event) {
-        // TODO: remove hardcoding
-        fetch('http://localhost:8000/roll?pool=1').then((response) => {
-            response.json().then((obj) => {
-                let value = obj.data[0];
-                this.setState({rollValue: value});
-            });
-        }, (error) => {
-            // TODO: use better error handling.
-            console.log('error!');
-            console.log(error)
-        });
     }
 
     _onChangeSuccesses(event) {

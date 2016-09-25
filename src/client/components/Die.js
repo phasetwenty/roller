@@ -74,7 +74,6 @@ class DieFace extends Component {
     _toggleOption(optionName) {
         let newState = {};
         newState[optionName] = !this.state[optionName];
-        console.log(newState);
         this.setState(newState);
     }
 }

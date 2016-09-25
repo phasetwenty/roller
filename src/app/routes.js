@@ -11,6 +11,8 @@ class RouteHandler {
         this.request = request;
         this.response = response;
         this.response.set('Content-Type', 'application/json');
+        // TODO: remove hardcoding
+        this.response.set('Access-Control-Allow-Origin', 'http://localhost:8080');
     }
 
     /**

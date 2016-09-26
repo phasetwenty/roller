@@ -12,13 +12,17 @@ class Presets extends Component {
 
     render() {
         return (
-            <ul className="list-group">
-                {this.props.items.map((name, i) =>
-                    <li className="list-group-item" key={i}>
-                        {name}
-                    </li>)
-                }
-            </ul>
+            <div>
+                <input type="text" placeholder="Filter"/>
+                <ul className="list-group">
+                    {this.props.items.map((name, i) =>
+                        <li className="list-group-item" key={i}>
+                            {name}
+                        </li>)
+                    }
+                </ul>
+            </div>
+
         );
     }
 }

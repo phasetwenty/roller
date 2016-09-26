@@ -4,6 +4,7 @@
 import 'whatwg-fetch';
 import React, {Component, PropTypes} from 'react';
 
+import Presets from './Presets';
 import Roll from './Roll';
 
 class App extends Component {
@@ -18,10 +19,15 @@ class App extends Component {
     render() {
         return (
             <div className="row">
-                <Roll onChangePoolSize={(event) => this._onChangePoolSize(event)}
-                      onClickRoll={(event) => this._onClickRoll(event)}
-                      poolSize={this.state.poolSize}
-                      rollValue={this.state.rollValue}/>
+                <div className="col-md-2">
+                    <Presets items={['item1']}/>
+                </div>
+                <div className="col-md-10">
+                    <Roll onChangePoolSize={(event) => this._onChangePoolSize(event)}
+                          onClickRoll={(event) => this._onClickRoll(event)}
+                          poolSize={this.state.poolSize}
+                          rollValue={this.state.rollValue}/>
+                </div>
             </div>
         );
     }

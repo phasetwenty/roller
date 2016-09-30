@@ -11,6 +11,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            doubleSuccessFaces: [],
             poolSize: 0,
             rollValue: null
         }
@@ -23,13 +24,26 @@ class App extends Component {
                     <Presets items={['item1']}/>
                 </div>
                 <div className="col-md-10">
-                    <Roll onChangePoolSize={(event) => this._onChangePoolSize(event)}
+                    <Roll doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
+                          onAnyDieFaceClickCallback={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
+                          onChangePoolSize={(event) => this._onChangePoolSize(event)}
                           onClickRoll={(event) => this._onClickRoll(event)}
                           poolSize={this.state.poolSize}
                           rollValue={this.state.rollValue}/>
                 </div>
             </div>
         );
+    }
+
+    _onAnyFaceClick(event, faceNumber) {
+        let doubleSuccessFaces = this.state.doubleSuccessFaces;
+        let index = doubleSuccessFaces.findIndex((e) => { return e === faceNumber; });
+        if (index !== -1) {
+            doubleSuccessFaces.splice(index, 1);
+        } else {
+            doubleSuccessFaces.push(faceNumber);
+        }
+        this.setState({doubleSuccessFaces: doubleSuccessFaces});
     }
 
     _onClickRoll(event) {
@@ -45,7 +59,6 @@ class App extends Component {
             console.log(error)
         });
     }
-
 
     _onChangePoolSize(event) {
         this.setState({poolSize: event.target.value});

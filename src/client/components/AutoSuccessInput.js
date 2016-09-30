@@ -13,8 +13,8 @@ class AutoSuccessInput extends Component {
 
     render() {
         return (
-            <div className="row">
-                <input {...this.props} type="number"/>
+            <div className="col-md-1">
+                <input {...this.props} type="number" className="form-control"/>
             </div>
         );
     }

@@ -36,9 +36,6 @@ class RouteHandler {
     }
 }
 
-/**
- * Generates a random number suitable for our purposes. Takes into account modulo bias.
- **/
 // TODO: remove hardcoding, use https://zuttobenkyou.wordpress.com/2012/10/18/generating-random-numbers-without-modulo-bias/
 function generateDie() {
     let result = Crypto.randomBytes(1)[0];

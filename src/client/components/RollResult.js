@@ -10,20 +10,40 @@ class RollResult extends Component {
     }
 
     render() {
-        if (this.props.facesValues.length === 0) {
-            return this._emptyComponent();
-        }
-    }
-
-    _emptyComponent() {
         return (
             <div className="row">
                 <div className="col-md-12">
                     <h2 className="text-center">Results</h2>
                 </div>
-                <div className="col-md-12">
-                    <h3 className="text-center">Click &quot;Roll&quot; above to get results.</h3>
-                </div>
+                {this._resultInternal()}
+            </div>
+        );
+    }
+
+    _resultInternal() {
+        return this.props.facesValues.length !== 0 ? this._resultsTable() : this._defaultMessage();
+    }
+
+    _resultsTable() {
+        return (
+            <div className="col-md-10 col-md-offset-2">
+                <table className="table table-bordered table-condensed">
+                    <thead>
+                        <tr>
+                            {[...new Array(this.props._facesCount)].map((v, index) => {
+                                return (<th key={`value-${index + 1}`}>{index + 1}</th>);
+                            })}
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        );
+    }
+
+    _defaultMessage() {
+        return (
+            <div className="col-md-12">
+                <h3 className="text-center">Click &quot;Roll&quot; above to get results.</h3>
             </div>
         );
     }

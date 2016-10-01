@@ -9,7 +9,7 @@ class DieOptionGroup extends Component {
         return (
             <div className="col-md-8">
                 <div className="btn-group" role="group" aria-label="label">
-                    {[...new Array(this.props.facesCount)].map((e, i) => this._createOption(i + 1))}
+                    {[...new Array(this.props._facesCount)].map((e, i) => this._createOption(i + 1))}
                 </div>
             </div>
         );

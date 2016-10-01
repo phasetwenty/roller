@@ -6,6 +6,7 @@ import React, {Component, PropTypes} from 'react';
 
 import Presets from './Presets';
 import Roll from './Roll';
+import RollResult from './RollResult';
 
 class App extends Component {
     constructor(props) {
@@ -19,18 +20,23 @@ class App extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col-md-2">
-                    <Presets items={['item1']}/>
+            <div className="container">
+                <div className="col-md-12">
+                    <h1 className="text-center">Roller</h1>
                 </div>
-                <div className="col-md-10">
-                    <Roll doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
-                          onAnyDieFaceClickCallback={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
-                          onChangePoolSize={(event) => this._onChangePoolSize(event)}
-                          onClickRoll={(event) => this._onClickRoll(event)}
-                          poolSize={this.state.poolSize}
-                          rollValue={this.state.rollValue}/>
+                <div className="row">
+                    <div className="col-md-2">
+                        <Presets items={['item1']}/>
+                    </div>
+                    <div className="col-md-10">
+                        <Roll doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
+                              onAnyDieFaceClickCallback={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
+                              onChangePoolSize={(event) => this._onChangePoolSize(event)}
+                              onClickRoll={(event) => this._onClickRoll(event)}
+                              poolSize={this.state.poolSize}/>
+                    </div>
                 </div>
+                <RollResult facesValues={[]} resultsResolver={this.state}/>
             </div>
         );
     }
@@ -63,7 +69,6 @@ class App extends Component {
     _onChangePoolSize(event) {
         this.setState({poolSize: event.target.value});
     }
-
 }
 
 export default App;

@@ -13,7 +13,6 @@ class Roll extends Component {
         onChangePoolSize: PropTypes.fn.isRequired,
         onClickRoll: PropTyes.fn.isRequired,
         poolSize: PropTypes.number.isRequired,
-        rollValue: PropTyes.array
     };
 
     constructor(props) {
@@ -52,9 +51,6 @@ class Roll extends Component {
                       onClick={this.props.onClickRoll}>
                     Roll
                 </span>
-                <div>
-                    Roll value: {this.props.rollValue}
-                </div>
             </div>
         );
     }

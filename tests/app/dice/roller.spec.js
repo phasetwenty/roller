@@ -3,7 +3,7 @@
  **/
 /* global describe, it */
 
-import {assert} from 'chai';
+import { assert } from 'chai';
 
 import Roller from '../../../src/app/dice/roller';
 
@@ -21,6 +21,8 @@ describe('Roller', () => {
     it('returns only numbers.', () => {
         const objectUnderTest = new Roller(10);
         const actualRoll = objectUnderTest.roll(10);
-        assert.isTrue(actualRoll.every((value) => Number.isNumber(value)));
+        for (let i = 0; i < actualRoll.length; ++i) {
+            assert.isNumber(actualRoll[i]);
+        }
     });
 });

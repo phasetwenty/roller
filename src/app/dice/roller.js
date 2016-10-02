@@ -19,7 +19,7 @@ class Roller {
      * @return {Array} An array of random numbers.
      **/
     roll(dieCount) {
-        return (new Array(dieCount)).map((v, i) => this._rollOne());
+        return [...new Array(dieCount)].map((v, i) => this._rollOne());
     }
 
     _rollOne() {

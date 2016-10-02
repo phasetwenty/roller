@@ -30,11 +30,18 @@ class RollResult extends Component {
                 <table className="table table-bordered table-condensed">
                     <thead>
                         <tr>
-                            {[...new Array(this.props._facesCount)].map((v, index) => {
-                                return (<th key={`value-${index + 1}`}>{index + 1}</th>);
+                            {[...new Array(this.props.facesCount)].map((v, index) => {
+                                return (<th key={`header-${index + 1}`}>{index + 1}</th>);
                             })}
                         </tr>
                     </thead>
+                    <tbody>
+                        <tr>
+                            {this._facesBreakdown().map((value, index) => {
+                                return (<td key={`value-${index + 1}`}>{value}</td>);
+                            })}
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         );
@@ -47,12 +54,17 @@ class RollResult extends Component {
             </div>
         );
     }
+
+    _facesBreakdown() {
+        let result = new Array(this.props.facesCount).fill(0);
+        this.props.facesValues.forEach(value => { result[value - 1]++; });
+        return result;
+    }
 }
 
 RollResult.propTypes = {
     facesCount: PropTypes.number,
     facesValues: PropTypes.array.isRequired,
-    resultsResolver: PropTypes.object.isRequired
 };
 
 export default RollResult;

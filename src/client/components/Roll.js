@@ -7,14 +7,6 @@ import AutoSuccessesInput from './AutoSuccessInput';
 import DieOptionGroup from './DieOptionGroup';
 
 class Roll extends Component {
-    static propTypes: {
-        doubleSuccessesFacesOn: PropTypes.array.isRequired,
-        onAnyDieFaceClickCallback: PropTypes.fn.isRequired,
-        onChangePoolSize: PropTypes.fn.isRequired,
-        onClickRoll: PropTyes.fn.isRequired,
-        poolSize: PropTypes.number.isRequired,
-    };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -31,7 +23,7 @@ class Roll extends Component {
                             Double
                         </label>
                         <DieOptionGroup facesOn={this.props.doubleSuccessesFacesOn}
-                                        facesCount={10}
+                                        facesCount={this.props.facesCount}
                                         onAnyFaceClickCallback={this.props.onAnyDieFaceClickCallback}/>
                     </div>
                     <div className="form-group">
@@ -59,5 +51,14 @@ class Roll extends Component {
         this.setState({autoSuccesses: event.target.value});
     }
 }
+
+Roll.propTypes = {
+    doubleSuccessesFacesOn: PropTypes.array.isRequired,
+    facesCount: PropTypes.number.isRequired,
+    onAnyDieFaceClickCallback: PropTypes.func.isRequired,
+    onChangePoolSize: PropTypes.func.isRequired,
+    onClickRoll: PropTypes.func.isRequired,
+    poolSize: PropTypes.number.isRequired,
+};
 
 export default Roll;

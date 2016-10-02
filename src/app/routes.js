@@ -1,7 +1,8 @@
 /**
  * Created by Chris on 9/22/16.
  **/
-import Crypto from 'crypto';
+import Resolver from './dice/resolver';
+import Roller from './dice/roller';
 
 /**
  * Provides a standard way of providing responses from our routes.
@@ -36,27 +37,6 @@ class RouteHandler {
     }
 }
 
-// TODO: remove hardcoding, use https://zuttobenkyou.wordpress.com/2012/10/18/generating-random-numbers-without-modulo-bias/
-function generateDie() {
-    let result = Crypto.randomBytes(1)[0];
-    while (result > 250) {
-        result = Crypto.randomBytes(1)[0];
-    }
-    return (result % 10) + 1;
-}
-
-/**
- *
- * @param size Integer representing the number of dice in the pool.
- **/
-function generatePool(size) {
-    let result = new Array(size);
-    for (let i = 0; i < size; ++i) {
-        result[i] = generateDie();
-    }
-    return result;
-}
-
 function Roll(request, response) {
     let handler = new RouteHandler(request, response);
 
@@ -73,8 +53,19 @@ function Roll(request, response) {
         return;
     }
 
+    // TODO: remove hardcoding.
+    const roller = new Roller(10);
+    const pool = roller.roll(numberOfDice);
+    const resolver = new Resolver(pool, {});
+
+    const data = {
+        botch: resolver.botch,
+        faces: pool,
+        successes: resolver.successes
+    };
+
     response.status(200);
-    response.send(handler.makeResult(generatePool(numberOfDice), 'No message'));
+    response.send(handler.makeResult(data, 'No message'));
 }
 
 export default Roll;

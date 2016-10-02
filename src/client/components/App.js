@@ -12,6 +12,11 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentResults: {
+                botch: null,
+                faces: [],
+                successes: null
+            },
             doubleSuccessFaces: [],
             poolSize: 0,
             rollValue: null
@@ -30,15 +35,23 @@ class App extends Component {
                     </div>
                     <div className="col-md-10">
                         <Roll doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
+                              facesCount={10}
                               onAnyDieFaceClickCallback={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
                               onChangePoolSize={(event) => this._onChangePoolSize(event)}
                               onClickRoll={(event) => this._onClickRoll(event)}
                               poolSize={this.state.poolSize}/>
                     </div>
                 </div>
-                <RollResult facesCount={10} facesValues={[1, 2]} resultsResolver={this.state}/>
+                <RollResult facesCount={10} facesValues={this.state.currentResults.faces}/>
             </div>
         );
+    }
+
+    _applyFetchedDatatoState(data) {
+        const {faces, successes, botch} = data;
+        this.setState({
+            currentResults: {botch: botch, faces: faces, successes: successes}
+        });
     }
 
     _onAnyFaceClick(event, faceNumber) {
@@ -57,7 +70,7 @@ class App extends Component {
         // TODO: remove hardcoding
         fetch(`http://localhost:8000/roll?pool=${poolSize}`).then((response) => {
             response.json().then((obj) => {
-                this.setState({rollValue: obj.data.join(', ')});
+                this._applyFetchedDatatoState(obj.data);
             });
         }, (error) => {
             // TODO: use better error handling.

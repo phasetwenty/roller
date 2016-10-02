@@ -4,7 +4,7 @@
   "description": "A learning exercise for ReactJS",
   "main": "index.js",
   "scripts": {
-    "api": "node app/bootstrap.js",
+    "api": "node src/app/bootstrap.js",
     "build": "webpack",
     "start": "webpack-dev-server --watch --inline --content-base public/",
     "test": "mocha --compilers js:babel-register --recursive tests"

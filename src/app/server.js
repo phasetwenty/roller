@@ -3,7 +3,7 @@
  **/
 import express from 'express';
 
-import Roll from './routes';
+import Roll from './routes/roll';
 
 let app = express();
 

@@ -5,7 +5,7 @@
 
 import {assert} from 'chai';
 
-import Resolver from '../../../src/app/dice/resolver';
+import {Resolver, ResolverOptions} from '../../../src/app/dice/resolver';
 
 describe('Resolver', () => {
     const miscPools = [
@@ -15,12 +15,12 @@ describe('Resolver', () => {
         {expectedSuccesses: 1, message: '1 success on a seven', pool: [7]},
         {expectedSuccesses: 1, message: '1 success on an eight', pool: [8]},
         {expectedSuccesses: 1, message: '1 success on a nine', pool: [9]},
-        {expectedSuccesses: 2, message: '2 successes on a ten', pool: [10]},
+        {expectedSuccesses: 1, message: '1 success on a ten', pool: [10]},
     ];
     miscPools.forEach((testCase) => {
         const {expectedSuccesses, message, pool} = testCase;
         it(`should handle ${message}.`, () => {
-            const objectUnderTest = new Resolver(pool, {});
+            const objectUnderTest = new Resolver(pool, {doubleFaces: []});
             assert.equal(objectUnderTest.successes, expectedSuccesses);
         });
     });
@@ -46,9 +46,13 @@ describe('Resolver', () => {
     botchPools.forEach(testCase => {
         const {message, pool} = testCase;
         it(`should detect a botch on ${message}.`, () => {
-            const objectUnderTest = new Resolver(pool, {});
+            const objectUnderTest = new Resolver(pool, {doubleFaces: []});
             assert.isTrue(objectUnderTest.botch);
         });
     });
 
+    it('should double a face when requested.', () => {
+        const objectUnderTest = new Resolver([10], {doubleFaces: [10]});
+        assert.equal(objectUnderTest.successes, 2);
+    });
 });

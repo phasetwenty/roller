@@ -23,7 +23,7 @@ class Resolver {
     get successes() {
         if (this._successes === null) {
             this._successes = this._pool.reduce((sum, value) => {
-                if (value === 10) {
+                if (this._options.doubleFaces.indexOf(value) !== -1) {
                     sum += 2;
                 } else if (value >= 7) {
                     sum += 1;
@@ -39,6 +39,9 @@ class Resolver {
 class ResolverOptions {
     constructor(options) {
         this._options = options;
+
+        this.autoSuccesses = 0;
+        this.doubleFaces = [];
         this.errors = [];
         this._validated = false;
     }
@@ -56,22 +59,23 @@ class ResolverOptions {
             return;
         }
 
-        if ('autoSuccesses' in options && !Number.isNumber(options.autoSuccesses)) {
+        if ('autoSuccesses' in this._options && !Number.isNumber(options.autoSuccesses)) {
             this.errors.push('"autoSuccesses" must be a number.');
-        } else if ('autoSuccesses' in options) {
+        } else if ('autoSuccesses' in this._options) {
             this.autoSuccesses = options.autoSuccesses;
-        } else {
-            this.autoSuccesses = 0;
         }
 
-        if ('doubleFaces' in options) {
-            if (Array.isArray(options.doubleFaces)) {
-                this.doubleFaces = options.doubleFaces;
-            } else if (!Array.isArray(options.doubleFaces)) {
+        if ('doubleFaces' in this._options) {
+            if (Array.isArray(this._options.doubleFaces)) {
+                this.doubleFaces = this._options.doubleFaces;
+            } else if (!Array.isArray(this._options.doubleFaces)) {
                 this.errors.push('"doubleFaces" must be an array.');
             }
         }
     }
 }
 
-export default Resolver;
+let exports = {};
+exports.Resolver = Resolver;
+exports.ResolverOptions = ResolverOptions;
+module.exports = exports;

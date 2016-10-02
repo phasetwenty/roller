@@ -70,8 +70,10 @@ class App extends Component {
 
     _onClickRoll(event) {
         let poolSize = this.state.poolSize;
+        let doubleFaces = this.state.doubleSuccessFaces.join(',');
         // TODO: remove hardcoding
-        fetch(`http://localhost:8000/roll?pool=${poolSize}`).then((response) => {
+        let url = `http://localhost:8000/roll?pool=${poolSize}&doubleFaces=${doubleFaces}`;
+        fetch(url).then((response) => {
             response.json().then((obj) => {
                 this._applyFetchedDatatoState(obj.data);
             });
@@ -83,7 +85,8 @@ class App extends Component {
     }
 
     _onChangePoolSize(event) {
-        this.setState({poolSize: event.target.value});
+        const poolSize = parseInt(event.target.value);
+        this.setState({poolSize: poolSize});
     }
 }
 

@@ -21,7 +21,7 @@ class DieOptionGroup extends Component {
         return (
             <span className={`btn ${displayClass}`}
                   key={value}
-                  onClick={(event) => this.props.onAnyFaceClickCallback(event, value)}
+                  onClick={(event) => this.props.onAnyFaceClick(event, value)}
                   type="button">
                 {value}
             </span>
@@ -30,9 +30,16 @@ class DieOptionGroup extends Component {
 }
 
 DieOptionGroup.propTypes = {
+    // Count of faces to represent in this group of options.
     facesCount: PropTypes.number.isRequired,
+    // The values of the faces which are turned on.
     facesOn: PropTypes.array.isRequired,
-    onAnyFaceClickCallback: PropTypes.func.isRequired
+    /**
+     * Callback accepting the following arguments:
+     * * event: the click event
+     * * value: the value of the face that was clicked.
+     **/
+    onAnyFaceClick: PropTypes.func.isRequired
 };
 
 export default DieOptionGroup;

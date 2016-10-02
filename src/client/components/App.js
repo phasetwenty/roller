@@ -36,7 +36,7 @@ class App extends Component {
                     <div className="col-md-10">
                         <Roll doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
                               facesCount={10}
-                              onAnyDieFaceClickCallback={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
+                              onAnyDieFaceClick={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
                               onChangePoolSize={(event) => this._onChangePoolSize(event)}
                               onClickRoll={(event) => this._onClickRoll(event)}
                               poolSize={this.state.poolSize}/>

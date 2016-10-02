@@ -37,7 +37,7 @@ class Roll extends Component {
                         </label>
                         <DieOptionGroup facesOn={this.props.doubleSuccessesFacesOn}
                                         facesCount={this.props.facesCount}
-                                        onAnyFaceClickCallback={this.props.onAnyDieFaceClickCallback}/>
+                                        onAnyFaceClick={this.props.onAnyDieFaceClick}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="id-auto-sux" className="col-md-2 control-label">
@@ -63,7 +63,7 @@ class Roll extends Component {
 Roll.propTypes = {
     doubleSuccessesFacesOn: PropTypes.array.isRequired,
     facesCount: PropTypes.number.isRequired,
-    onAnyDieFaceClickCallback: PropTypes.func.isRequired,
+    onAnyDieFaceClick: PropTypes.func.isRequired,
     onChangePoolSize: PropTypes.func.isRequired,
     onClickRoll: PropTypes.func.isRequired,
     poolSize: PropTypes.number.isRequired,

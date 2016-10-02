@@ -14,7 +14,7 @@ class AutoSuccessInput extends Component {
     render() {
         return (
             <div className="col-md-1">
-                <input {...this.props} type="number" className="form-control"/>
+                <input {...this.props} id="id-auto-sux" type="number" className="form-control"/>
             </div>
         );
     }

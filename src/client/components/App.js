@@ -42,7 +42,10 @@ class App extends Component {
                               poolSize={this.state.poolSize}/>
                     </div>
                 </div>
-                <RollResult facesCount={10} facesValues={this.state.currentResults.faces}/>
+                <RollResult facesCount={10}
+                            facesValues={this.state.currentResults.faces}
+                            isBotch={this.state.currentResults.botch}
+                            successesCount={this.state.currentResults.successes}/>
             </div>
         );
     }

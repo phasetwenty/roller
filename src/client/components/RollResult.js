@@ -15,18 +15,22 @@ class RollResult extends Component {
                 <div className="col-md-12">
                     <h2 className="text-center">Results</h2>
                 </div>
-                {this._resultInternal()}
+                {this._renderTableOrMessage()}
             </div>
         );
     }
 
-    _resultInternal() {
+    _renderTableOrMessage() {
         return this.props.facesValues.length !== 0 ? this._resultsTable() : this._defaultMessage();
     }
 
     _resultsTable() {
         return (
             <div className="col-md-10 col-md-offset-2">
+                <ul>
+                    <li>You rolled {this.props.successesCount} successes.</li>
+                    <li>You {this.props.isBotch ? 'botched.' : 'did not botch.'}</li>
+                </ul>
                 <table className="table table-bordered table-condensed">
                     <thead>
                         <tr>
@@ -65,6 +69,8 @@ class RollResult extends Component {
 RollResult.propTypes = {
     facesCount: PropTypes.number,
     facesValues: PropTypes.array.isRequired,
+    isBotch: PropTypes.bool,
+    successesCount: PropTypes.number,
 };
 
 export default RollResult;

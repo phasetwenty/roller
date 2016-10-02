@@ -1,7 +1,7 @@
 /**
  * Created by Chris on 9/18/16.
  **/
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 
 import AutoSuccessesInput from './AutoSuccessInput';
 import DieOptionGroup from './DieOptionGroup';
@@ -19,6 +19,19 @@ class Roll extends Component {
             <div className="row">
                 <form className="form-horizontal">
                     <div className="form-group">
+                        <label htmlFor="id-pool-size" className="col-md-2 control-label">
+                            # Dice to roll
+                        </label>
+                        <div className="col-md-1">
+                            <input className="form-control"
+                                   id="id-pool-size"
+                                   onChange={(event) => this.props.onChangePoolSize(event)}
+                                   type="number"
+                                   value={this.props.poolSize}/>
+                        </div>
+
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="id-double-sux" className="col-md-2 control-label">
                             Double
                         </label>
@@ -31,13 +44,8 @@ class Roll extends Component {
                             Auto Successes
                         </label>
                         <AutoSuccessesInput onChange={(event) => this._onChangeSuccesses(event)}
-                                          value={this.state.autoSuccesses}/>
+                                            value={this.state.autoSuccesses}/>
                     </div>
-
-                    <label htmlFor="id-pool-size">Number of dice to roll</label>
-                    <input id="id-pool-size" onChange={(event) => this.props.onChangePoolSize(event)}
-                           type="number"
-                           value={this.props.poolSize}/>
                 </form>
                 <span className="btn btn-primary"
                       onClick={this.props.onClickRoll}>

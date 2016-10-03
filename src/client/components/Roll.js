@@ -7,13 +7,6 @@ import AutoSuccessesInput from './AutoSuccessInput';
 import DieOptionGroup from './DieOptionGroup';
 
 class Roll extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            autoSuccesses: 0,
-        };
-    }
-
     render() {
         return (
             <div className="row">
@@ -43,8 +36,8 @@ class Roll extends Component {
                         <label htmlFor="id-auto-sux" className="col-md-2 control-label">
                             Auto Successes
                         </label>
-                        <AutoSuccessesInput onChange={(event) => this._onChangeSuccesses(event)}
-                                            value={this.state.autoSuccesses}/>
+                        <AutoSuccessesInput onChange={this.props.onAutoSuccessesUpdate}
+                                            value={this.props.autoSuccessesValue}/>
                     </div>
                 </form>
                 <span className="btn btn-primary"
@@ -54,16 +47,14 @@ class Roll extends Component {
             </div>
         );
     }
-
-    _onChangeSuccesses(event) {
-        this.setState({autoSuccesses: event.target.value});
-    }
 }
 
 Roll.propTypes = {
+    autoSuccessesValue: PropTypes.string.isRequired,
     doubleSuccessesFacesOn: PropTypes.array.isRequired,
     facesCount: PropTypes.number.isRequired,
     onAnyDieFaceClick: PropTypes.func.isRequired,
+    onAutoSuccessesUpdate: PropTypes.func.isRequired,
     onChangePoolSize: PropTypes.func.isRequired,
     onClickRoll: PropTypes.func.isRequired,
     poolSize: PropTypes.number.isRequired,

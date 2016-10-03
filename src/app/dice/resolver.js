@@ -29,7 +29,7 @@ class Resolver {
                     sum += 1;
                 }
                 return sum;
-            }, 0);
+            }, this._options.autoSuccesses);
         }
 
         return this._successes;

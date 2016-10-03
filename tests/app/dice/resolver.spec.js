@@ -20,7 +20,7 @@ describe('Resolver', () => {
     miscPools.forEach((testCase) => {
         const {expectedSuccesses, message, pool} = testCase;
         it(`should handle ${message}.`, () => {
-            const objectUnderTest = new Resolver(pool, {doubleFaces: []});
+            const objectUnderTest = new Resolver(pool, {autoSuccesses: 0, doubleFaces: []});
             assert.equal(objectUnderTest.successes, expectedSuccesses);
         });
     });
@@ -46,14 +46,21 @@ describe('Resolver', () => {
     botchPools.forEach(testCase => {
         const {message, pool} = testCase;
         it(`should detect a botch on ${message}.`, () => {
-            const objectUnderTest = new Resolver(pool, {doubleFaces: []});
+            const objectUnderTest = new Resolver(pool, {autoSuccesses: 0, doubleFaces: []});
             assert.isTrue(objectUnderTest.botch);
         });
     });
 
     it('should double a face when requested.', () => {
-        const objectUnderTest = new Resolver([10], {doubleFaces: [10]});
+        const objectUnderTest = new Resolver([10], {autoSuccesses: 0, doubleFaces: [10]});
         assert.equal(objectUnderTest.successes, 2);
+    });
+
+    it('should return the auto successes when there were no other successes.', () => {
+        const expectedSuccesses = 3;
+        const options = {autoSuccesses: expectedSuccesses, doubleFaces: []};
+        const objectUnderTest = new Resolver([4], options);
+        assert.equal(objectUnderTest.successes, expectedSuccesses);
     });
 });
 

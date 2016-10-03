@@ -12,6 +12,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            autoSuccesses: '0',
             currentResults: {
                 botch: null,
                 faces: [],
@@ -34,9 +35,11 @@ class App extends Component {
                         <Presets items={['item1']}/>
                     </div>
                     <div className="col-md-10">
-                        <Roll doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
+                        <Roll autoSuccessesValue={this.state.autoSuccesses}
+                              doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
                               facesCount={10}
                               onAnyDieFaceClick={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
+                              onAutoSuccessesUpdate={(event) => { this._onAutoSuccessesUpdate(event)}}
                               onChangePoolSize={(event) => this._onChangePoolSize(event)}
                               onClickRoll={(event) => this._onClickRoll(event)}
                               poolSize={this.state.poolSize}/>
@@ -68,11 +71,20 @@ class App extends Component {
         this.setState({doubleSuccessFaces: doubleSuccessFaces});
     }
 
+    _onAutoSuccessesUpdate(event) {
+        this.setState({autoSuccesses: event.target.value})
+    }
+
     _onClickRoll(event) {
-        let poolSize = this.state.poolSize;
+        let {autoSuccesses, poolSize} = this.state;
         let doubleFaces = this.state.doubleSuccessFaces.join(',');
-        // TODO: remove hardcoding
-        let url = `http://localhost:8000/roll?pool=${poolSize}&doubleFaces=${doubleFaces}`;
+        let url = [
+            // TODO: remove hardcoding
+            'http://localhost:8000/roll',
+            `?pool=${poolSize}`,
+            `&autoSuccesses=${autoSuccesses}`,
+            `&doubleFaces=${doubleFaces}`,
+        ].join('');
         fetch(url).then((response) => {
             response.json().then((obj) => {
                 this._applyFetchedDatatoState(obj.data);

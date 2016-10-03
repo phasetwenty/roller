@@ -12,14 +12,14 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            autoSuccesses: '0',
+            autoSuccesses: 0,
             currentResults: {
                 botch: null,
                 faces: [],
                 successes: null
             },
             doubleSuccessFaces: [],
-            poolSize: 0,
+            poolSize: 1,
             rollValue: null
         }
     }
@@ -72,7 +72,7 @@ class App extends Component {
     }
 
     _onAutoSuccessesUpdate(event) {
-        this.setState({autoSuccesses: event.target.value})
+        this.setState({autoSuccesses: this._normalizeNumericInput(event.target.value, 0)});
     }
 
     _onClickRoll(event) {
@@ -97,8 +97,15 @@ class App extends Component {
     }
 
     _onChangePoolSize(event) {
-        const poolSize = parseInt(event.target.value);
-        this.setState({poolSize: poolSize});
+        this.setState({poolSize: this._normalizeNumericInput(event.target.value, 1)});
+    }
+
+    _normalizeNumericInput(rawValue, minimumValue) {
+        let value = parseInt(rawValue);
+        if (Number.isNaN(value) || value < minimumValue) {
+            value = minimumValue;
+        }
+        return value;
     }
 }
 

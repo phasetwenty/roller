@@ -50,7 +50,7 @@ class Roll extends Component {
 }
 
 Roll.propTypes = {
-    autoSuccessesValue: PropTypes.string.isRequired,
+    autoSuccessesValue: PropTypes.number.isRequired,
     doubleSuccessesFacesOn: PropTypes.array.isRequired,
     facesCount: PropTypes.number.isRequired,
     onAnyDieFaceClick: PropTypes.func.isRequired,

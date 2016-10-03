@@ -2,7 +2,7 @@
  * Created by Chris on 9/14/16.
  **/
 
-import React, { Component, Error, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class DieOptionGroup extends Component {
     render() {
@@ -31,7 +31,17 @@ class DieOptionGroup extends Component {
 
 DieOptionGroup.propTypes = {
     // Count of faces to represent in this group of options.
-    facesCount: PropTypes.number.isRequired,
+    facesCount: (props, propName, componentName) => {
+        if (!('facesCount' in props)) {
+            return new Error(`'facesCount' is a required prop of ${componentName}.`);
+        }
+        const facesCount = parseInt(props.facesCount);
+        if (Number.isNaN(facesCount) || facesCount < 1) {
+            const message = `'facesCount' prop of ${componentName} must be a nonnegative integer.`;
+            return new Error(message);
+        }
+    },
+    // PropTypes.number.isRequired,
     // The values of the faces which are turned on.
     facesOn: PropTypes.array.isRequired,
     /**

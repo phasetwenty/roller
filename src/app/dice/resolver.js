@@ -22,14 +22,12 @@ class Resolver {
 
     get successes() {
         if (this._successes === null) {
-            this._successes = this._pool.reduce((sum, value) => {
-                if (this._options.doubleFaces.indexOf(value) !== -1) {
-                    sum += 2;
-                } else if (value >= 7) {
-                    sum += 1;
-                }
-                return sum;
-            }, this._options.autoSuccesses);
+            this._successes = this._pool
+                .filter((value) => { return value >= this._options.targetNumber; })
+                .reduce((sum, value) => {
+                    sum += (this._options.doubleFaces.indexOf(value) !== -1) ? 2 : 1;
+                    return sum;
+                }, this._options.autoSuccesses);
         }
 
         return this._successes;
@@ -47,6 +45,7 @@ class ResolverOptions {
         this.doubleFaces = [];
         this.errors = [];
         this.poolSize = null;
+        this.targetNumber = 7;
     }
 
     get isValid() {
@@ -60,6 +59,7 @@ class ResolverOptions {
         this._validatePool();
         this._validateAutoSuccesses();
         this._validateDoubleFaces();
+        this._validateTargetNumber();
     }
 
     _validateAutoSuccesses() {
@@ -110,6 +110,16 @@ class ResolverOptions {
             this.errors.push(`${name} must be a number greater than or equal to zero.`);
         }
         return value;
+    }
+
+    _validateTargetNumber() {
+        if (!('targetNumber' in this._query) || this._query.targetNumber === '') {
+            return;
+        }
+        this.targetNumber = this._validateNonnegativeParam(
+            'targetNumber',
+            this._query.targetNumber);
+
     }
 }
 

@@ -20,7 +20,8 @@ describe('Resolver', () => {
     miscPools.forEach((testCase) => {
         const {expectedSuccesses, message, pool} = testCase;
         it(`should handle ${message}.`, () => {
-            const objectUnderTest = new Resolver(pool, {autoSuccesses: 0, doubleFaces: []});
+            const options = {autoSuccesses: 0, doubleFaces: [], targetNumber: 7};
+            const objectUnderTest = new Resolver(pool, options);
             assert.equal(objectUnderTest.successes, expectedSuccesses);
         });
     });
@@ -52,7 +53,8 @@ describe('Resolver', () => {
     });
 
     it('should double a face when requested.', () => {
-        const objectUnderTest = new Resolver([10], {autoSuccesses: 0, doubleFaces: [10]});
+        const options = {autoSuccesses: 0, doubleFaces: [10], targetNumber: 7};
+        const objectUnderTest = new Resolver([10], options);
         assert.equal(objectUnderTest.successes, 2);
     });
 

@@ -1,5 +1,6 @@
 /**
- * Created by Chris on 9/15/16.
+ * Copyright 2016 Christopher Haverman
+ * All Rights Reserved
  **/
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');

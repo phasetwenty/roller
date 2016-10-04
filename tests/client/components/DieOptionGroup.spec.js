@@ -1,5 +1,6 @@
 /**
- * Created by Chris on 10/2/16.
+ * Copyright 2016 Christopher Haverman
+ * All Rights Reserved
  **/
 /* global describe, it */
 import {assert} from 'chai';

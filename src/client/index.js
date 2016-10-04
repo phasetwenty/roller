@@ -1,5 +1,6 @@
 /**
- * Created by Chris on 9/14/16.
+ * Copyright 2016 Christopher Haverman
+ * All Rights Reserved
  **/
 import React from 'react';
 import ReactDom from 'react-dom';

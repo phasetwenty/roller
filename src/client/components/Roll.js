@@ -1,5 +1,6 @@
 /**
- * Created by Chris on 9/18/16.
+ * Copyright 2016 Christopher Haverman
+ * All Rights Reserved
  **/
 import React, {Component, PropTypes} from 'react';
 

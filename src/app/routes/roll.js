@@ -1,5 +1,6 @@
 /**
- * Created by Chris on 10/1/16.
+ * Copyright 2016 Christopher Haverman
+ * All Rights Reserved
  **/
 import {Resolver, ResolverOptions} from '../dice/resolver';
 import Roller from '../dice/roller';

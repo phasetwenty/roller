@@ -1,5 +1,6 @@
 /**
- * Created by Chris on 9/25/16.
+ * Copyright 2016 Christopher Haverman
+ * All Rights Reserved
  **/
 import 'whatwg-fetch';
 import React, {Component, PropTypes} from 'react';

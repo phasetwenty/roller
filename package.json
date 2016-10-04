@@ -4,10 +4,11 @@
   "description": "A learning exercise for ReactJS",
   "main": "index.js",
   "scripts": {
-    "api": "node src/app/bootstrap.js",
     "build": "webpack",
-    "start": "webpack-dev-server --watch --inline --content-base public/",
-    "test": "mocha --compilers js:babel-register --recursive tests"
+    "build:watch": "webpack --watch",
+    "start": "node src/app/bootstrap.js",
+    "test": "mocha --compilers js:babel-register --recursive tests",
+    "wds": "webpack-dev-server --watch --inline --content-base public/"
   },
   "author": "Christopher Haverman",
   "license": "ISC",

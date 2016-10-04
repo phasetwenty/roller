@@ -7,8 +7,9 @@ import express from 'express';
 import Roll from './routes/roll';
 
 let app = express();
+app.use(express.static('public'));
 
-app.get('/roll', Roll);
+app.get('/api/v1/roll', Roll);
 
 let port = 8000;
 app.listen(port, () => {

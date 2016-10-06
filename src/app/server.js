@@ -5,13 +5,13 @@
 import express from 'express';
 
 import Roll from './routes/roll';
+import {API_PATH, PORT} from '../settings';
 
 let app = express();
 app.use(express.static('public'));
 
-app.get('/api/v1/roll', Roll);
+app.get(`${API_PATH}/roll`, Roll);
 
-let port = 8000;
-app.listen(port, () => {
-    console.log(`Listening on http://localhost:${port}/`);
+app.listen(PORT, () => {
+    console.log(`Listening on http://localhost:${PORT}/`);
 });

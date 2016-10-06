@@ -4,13 +4,14 @@
  * Copyright 2016 Christopher Haverman
  * All Rights Reserved
  **/
+import {API_PATH, PORT} from '../../settings';
+
 class RouteHandler {
     constructor(request, response) {
         this.request = request;
         this.response = response;
         this.response.set('Content-Type', 'application/json');
-        // TODO: remove hardcoding
-        this.response.set('Access-Control-Allow-Origin', 'http://localhost:8080');
+        this.response.set('Access-Control-Allow-Origin', `${API_PATH}/roll:${PORT}`);
     }
 
     /**

@@ -5,6 +5,7 @@
 import 'whatwg-fetch';
 import React, {Component, PropTypes} from 'react';
 
+import {API_PATH, DIE_FACES} from '../../settings';
 import Presets from './Presets';
 import Roll from './Roll';
 import RollResult from './RollResult';
@@ -38,7 +39,7 @@ class App extends Component {
                     <div className="col-md-10">
                         <Roll autoSuccessesValue={this.state.autoSuccesses}
                               doubleSuccessesFacesOn={this.state.doubleSuccessFaces}
-                              facesCount={10}
+                              facesCount={DIE_FACES}
                               onAnyDieFaceClick={(event, faceNumber) => { this._onAnyFaceClick(event, faceNumber) }}
                               onAutoSuccessesUpdate={(event) => { this._onAutoSuccessesUpdate(event)}}
                               onChangePoolSize={(event) => this._onChangePoolSize(event)}
@@ -46,7 +47,7 @@ class App extends Component {
                               poolSize={this.state.poolSize}/>
                     </div>
                 </div>
-                <RollResult facesCount={10}
+                <RollResult facesCount={DIE_FACES}
                             facesValues={this.state.currentResults.faces}
                             isBotch={this.state.currentResults.botch}
                             successesCount={this.state.currentResults.successes}/>
@@ -80,8 +81,7 @@ class App extends Component {
         let {autoSuccesses, poolSize} = this.state;
         let doubleFaces = this.state.doubleSuccessFaces.join(',');
         let url = [
-            // TODO: remove hardcoding
-            'http://localhost:8000/roll',
+            `${API_PATH}/roll`,
             `?pool=${poolSize}`,
             `&autoSuccesses=${autoSuccesses}`,
             `&doubleFaces=${doubleFaces}`,

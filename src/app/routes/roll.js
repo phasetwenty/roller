@@ -2,6 +2,7 @@
  * Copyright 2016 Christopher Haverman
  * All Rights Reserved
  **/
+import {DIE_FACES} from '../../settings';
 import {Resolver, ResolverOptions} from '../dice/resolver';
 import Roller from '../dice/roller';
 import RouteHandler from './handler';
@@ -16,8 +17,7 @@ function Roll(request, response) {
         return;
     }
 
-    // TODO: remove hardcoding.
-    const roller = new Roller(10);
+    const roller = new Roller(DIE_FACES);
     const pool = roller.roll(resolverOptions.poolSize);
     const resolver = new Resolver(pool, resolverOptions);
 

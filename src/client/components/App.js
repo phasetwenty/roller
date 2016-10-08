@@ -17,6 +17,7 @@ class App extends Component {
             autoSuccesses: 0,
             currentResults: {
                 botch: null,
+                dateCreated: null,
                 faces: [],
                 successes: null
             },
@@ -47,7 +48,8 @@ class App extends Component {
                               poolSize={this.state.poolSize}/>
                     </div>
                 </div>
-                <RollResult facesCount={DIE_FACES}
+                <RollResult dateCreated={this.state.currentResults.dateCreated}
+                            facesCount={DIE_FACES}
                             facesValues={this.state.currentResults.faces}
                             isBotch={this.state.currentResults.botch}
                             successesCount={this.state.currentResults.successes}/>
@@ -55,10 +57,15 @@ class App extends Component {
         );
     }
 
-    _applyFetchedDatatoState(data) {
-        const {faces, successes, botch} = data;
+    _applyFetchedDatatoState(response) {
+        const {faces, successes, botch} = response.data;
         this.setState({
-            currentResults: {botch: botch, faces: faces, successes: successes}
+            currentResults: {
+                botch: botch,
+                dateCreated: new Date(response.timestamp),
+                faces: faces,
+                successes: successes
+            }
         });
     }
 
@@ -88,7 +95,7 @@ class App extends Component {
         ].join('');
         fetch(url).then((response) => {
             response.json().then((obj) => {
-                this._applyFetchedDatatoState(obj.data);
+                this._applyFetchedDatatoState(obj);
             });
         }, (error) => {
             // TODO: use better error handling.

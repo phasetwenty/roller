@@ -31,6 +31,7 @@ class RollResult extends Component {
                 <ul>
                     <li>You rolled {this.props.successesCount} successes.</li>
                     <li>You {this.props.isBotch ? 'botched.' : 'did not botch.'}</li>
+                    <li>This roll was created at {this.props.dateCreated.toString()}.</li>
                 </ul>
                 <table className="table table-bordered table-condensed">
                     <thead>
@@ -68,6 +69,7 @@ class RollResult extends Component {
 }
 
 RollResult.propTypes = {
+    dateCreated: PropTypes.object,
     facesCount: PropTypes.number,
     facesValues: PropTypes.array.isRequired,
     isBotch: PropTypes.bool,

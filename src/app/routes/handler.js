@@ -1,11 +1,20 @@
 /**
- * Provides a standard way of providing responses from our routes.
- *
  * Copyright 2016 Christopher Haverman
  * All Rights Reserved
  **/
 import {API_PATH, PORT} from '../../settings';
 
+
+/**
+ * Provides standard responses from our routes.
+ *
+ * The response will be an object with the following schema:
+ * {
+ *      message: a string explaining the status, if available.
+ *      status: either 'ok' or 'error'
+ *      timestamp: Unix UTC timestamp representing the time the response was served.
+ * }
+ **/
 class RouteHandler {
     constructor(request, response) {
         this.request = request;
@@ -20,7 +29,7 @@ class RouteHandler {
      * @param message String message to encode.
      **/
     makeError(message) {
-        return JSON.stringify({status: 'error', message: message});
+        return JSON.stringify({status: 'error', message: message, timestamp: Date.now()});
     }
 
     /**
@@ -31,7 +40,7 @@ class RouteHandler {
      * @return a JSON encoded string representing our response.
      **/
     makeResult(value, message) {
-        return JSON.stringify({status: 'ok', data: value, message: message});
+        return JSON.stringify({status: 'ok', data: value, message: message, timestamp: Date.now()});
     }
 }
 

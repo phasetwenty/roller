@@ -120,7 +120,6 @@ class ResolverOptions {
         this.targetNumber = this._validateNonnegativeParam(
             'targetNumber',
             this._query.targetNumber);
-
     }
 }
 

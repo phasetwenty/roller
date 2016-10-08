@@ -8,22 +8,22 @@ import InvalidArgumentError from '../errors';
  * Provides information about dice pools.
  **/
 class Resolver {
-    constructor(pool, resolverOptions) {
-        if (!Array.isArray(pool)) {
-            throw new InvalidArgumentError('"pool" must be an array.');
+    constructor(dieFaces, resolverOptions) {
+        if (!Array.isArray(dieFaces)) {
+            throw new InvalidArgumentError('"dieFaces" must be an array.');
         }
-        this._pool = pool;
+        this._dieFaces = dieFaces;
         this._options = resolverOptions;
         this._successes = null;
     }
 
     get botch() {
-        return this.successes === 0 && this._pool.indexOf(1) !== -1;
+        return this.successes === 0 && this._dieFaces.indexOf(1) !== -1;
     }
 
     get successes() {
         if (this._successes === null) {
-            this._successes = this._pool
+            this._successes = this._dieFaces
                 .filter((value) => { return value >= this._options.targetNumber; })
                 .reduce((sum, value) => {
                     sum += (this._options.doubleFaces.indexOf(value) !== -1) ? 2 : 1;

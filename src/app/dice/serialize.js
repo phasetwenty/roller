@@ -8,7 +8,8 @@ import {ResolverOptions} from '../../../src/app/dice/resolver';
 const SERIALIZED_ITEM_COUNT = 5;
 
 /**
- * Deserializes a roll, which is used for replay.
+ * Deserializes a roll, which is used for replay. Results of deserialization are stored as members
+ * of the instance.
  **/
 class Deserializer {
     constructor(message) {

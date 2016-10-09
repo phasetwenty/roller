@@ -13,6 +13,7 @@ import {API_PATH, PORT} from '../../settings';
  *      message: a string explaining the status, if available.
  *      status: either 'ok' or 'error'
  *      timestamp: Unix UTC timestamp representing the time the response was served.
+ *      url: URL associated with these results. (WIP)
  * }
  **/
 class RouteHandler {

@@ -9,5 +9,7 @@
 module.exports = {
     API_PATH: '/api/v1',
     DIE_FACES: 10,
-    PORT: 8000
+    PORT: 8000,
+    SECRET: 'horse',
+    SIGN_ALGORITHM: 'md5'
 };

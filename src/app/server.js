@@ -4,13 +4,16 @@
  **/
 import express from 'express';
 
-import Roll from './routes/roll';
-import {API_PATH, PORT} from '../settings';
+import {API_PATH, PORT, STATIC_ROOT} from '../settings';
+import Router from './routes/main';
 
-let app = express();
-app.use(express.static('public'));
+const app = express();
+app.use(express.static(STATIC_ROOT));
 
-app.get(`${API_PATH}/roll`, Roll);
+const router = new Router(API_PATH);
+router.routes.forEach((route) => {
+    app.get(route.path, route.handler);
+});
 
 app.listen(PORT, () => {
     console.log(`Listening on http://localhost:${PORT}/`);

@@ -2,7 +2,7 @@
   "name": "roller",
   "version": "0.5.0",
   "description": "A learning exercise for ReactJS",
-  "main": "index.js",
+  "main": "src/app/bootstrap.js",
   "scripts": {
     "build": "webpack",
     "build:watch": "webpack --watch",

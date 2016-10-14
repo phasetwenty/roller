@@ -1,6 +1,6 @@
 {
   "name": "roller",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "A learning exercise for ReactJS",
   "main": "index.js",
   "scripts": {

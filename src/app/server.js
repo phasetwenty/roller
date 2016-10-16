@@ -4,7 +4,7 @@
  **/
 import express from 'express';
 
-import {API_PATH, PORT, STATIC_ROOT} from '../settings';
+import {API_PATH, PORT, STATIC_ROOT} from '../settings.heroku';
 import Router from './routes/main';
 
 const app = express();

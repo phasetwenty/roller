@@ -2,7 +2,7 @@
  * Copyright 2016 Christopher Haverman
  * All Rights Reserved
  **/
-import {API_PATH, PORT} from '../../settings';
+import {API_PATH, PORT} from '../../settings.heroku';
 
 
 /**
@@ -17,6 +17,7 @@ import {API_PATH, PORT} from '../../settings';
  * }
  **/
 class RouteHandler {
+    // TODO: Inject globals
     constructor(request, response) {
         this.request = request;
         this.response = response;

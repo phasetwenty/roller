@@ -2,7 +2,7 @@
  * Copyright 2016 Christopher Haverman
  * All Rights Reserved
  **/
-import {DIE_FACES, SECRET, SIGN_ALGORITHM} from '../../settings';
+import {DIE_FACES, SECRET, SIGN_ALGORITHM} from '../../settings.heroku';
 import {Resolver, ResolverOptions} from '../dice/resolver';
 import Roller from '../dice/roller';
 import RouteHandler from './handler';

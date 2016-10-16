@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "build:watch": "webpack --watch",
+    "postinstall": "webpack --progress --colors",
     "start": "node src/app/bootstrap.js",
     "test": "mocha --compilers js:babel-register --recursive tests",
     "test:quiet": "mocha --compilers js:babel-register --reporter progress --recursive tests",
